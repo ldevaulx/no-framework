@@ -1,6 +1,10 @@
 <?php
 namespace NOF;
 
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 error_reporting(E_ALL);
@@ -20,4 +24,12 @@ if ($environment !== 'production') {
 }
 $whoops->register();
 
-throw new \Exception;
+
+$request = Request::createFromGlobals();
+
+$response = new Response();
+
+$content = '<h1>Hello World</h1>';
+$response->setContent($content);
+
+$response->send();
